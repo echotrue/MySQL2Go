@@ -31,12 +31,8 @@ import (
 )
 
 var (
-	conn *sql.DB
-	err  error
-	// tableChan = make(chan *GenerateData, 20)
-	// doneChan     = make(chan uint16)
-	// completeChan = make(chan bool)
-	// stopCh     = make(chan struct{})
+	conn       *sql.DB
+	err        error
 	resultChan = make(chan string)
 )
 
@@ -124,9 +120,8 @@ var generateCmd = &cobra.Command{
 	},
 }
 
-
+// Generate table to struct
 func generateModel(db string, tableName string, path string) {
-	// fmt.Println(tableName)
 	columnRows, _ := conn.Query("SELECT `COLUMN_NAME`,`COLUMN_TYPE`,`DATA_TYPE`,`COLUMN_COMMENT` FROM `information_schema`.`COLUMNS` WHERE `TABLE_SCHEMA` = '" + db + "' AND `TABLE_NAME`='" + tableName + "'")
 
 	tableNameStr := ""
@@ -166,7 +161,6 @@ type ` + tableNameStr + ` struct {`
 		} else {
 			columnTypeStr = dataType + " " + columnTypeSlice[1]
 		}
-		// fmt.Println(columnTypeStr)
 		// 拼接结构体内容
 		structContent += `
 	` + columnNameStr + `  ` + common.MySQLTypeMap[columnTypeStr] + `     ` + fmt.Sprintf("`json:\"%s\"`", columnName) + `    // ` + columnComment
@@ -188,7 +182,6 @@ type ` + tableNameStr + ` struct {`
 		fmt.Println(3)
 		resultChan <- fmt.Sprintf("Generate struct faield:%s", err.Error())
 	} else {
-		// fmt.Println(4)
 		resultChan <- fmt.Sprintf("success")
 	}
 

@@ -9,7 +9,9 @@ go get -u github.com/echotrue/MySQL2Go
 ```
 
 #### Download
-[Downloading](https://www.baidu.com)
+[Linux](https://github.com/echotrue/MySQL2Go/releases/download/v0.1-alpha/GoSQL_linux.zip)
+[Windows](https://github.com/echotrue/MySQL2Go/releases/download/v0.1-alpha/GoSQL_windows.zip)
+[MacOS](https://github.com/echotrue/MySQL2Go/releases/download/v0.1-alpha/GoSQL_mac.zip)
 
 
 ​    
